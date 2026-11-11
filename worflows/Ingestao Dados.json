@@ -1,0 +1,260 @@
+{
+  "name": "Ingestao Dados",
+  "nodes": [
+    {
+      "parameters": {
+        "mode": "insert",
+        "memoryKey": {
+          "__rl": true,
+          "value": "perfil",
+          "mode": "list",
+          "cachedResultName": "perfil"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+      "typeVersion": 1.4,
+      "position": [
+        -704,
+        0
+      ],
+      "id": "d8cfdc56-ba28-44f2-97bb-b4338c312dc2",
+      "name": "Simple Vector Store"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -784,
+        208
+      ],
+      "id": "a9066b3b-9189-43bb-8bff-edd0c23d43d3",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "NX7Zx2vGv04kNGbv",
+          "name": "OpenAI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataType": "binary",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        -592,
+        208
+      ],
+      "id": "74ba838a-063b-4ff7-9525-3915ea2654a2",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "formTitle": "Inserção na base de dados",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Selecione a planilha de perfil",
+              "fieldType": "file",
+              "acceptFileTypes": ".xlsx, .csv"
+            }
+          ]
+        },
+        "options": {
+          "appendAttribution": false,
+          "buttonLabel": "Executar"
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.6,
+      "position": [
+        -912,
+        0
+      ],
+      "id": "5e337836-3daf-4abe-8992-6c946b73d735",
+      "name": "On form submission",
+      "webhookId": "80fc8101-c6e4-4ebb-9704-e1560dd7c778"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -224,
+        16
+      ],
+      "id": "c0ef5ebd-1fd4-405a-af3f-8589cba73eb1",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "memoryKey": {
+          "__rl": true,
+          "value": "perfil",
+          "mode": "list",
+          "cachedResultName": "perfil"
+        },
+        "clearStore": true
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+      "typeVersion": 1.4,
+      "position": [
+        16,
+        16
+      ],
+      "id": "944159a0-2382-4eaf-badf-558af405d879",
+      "name": "Simple Vector Store1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        144,
+        208
+      ],
+      "id": "e2aeb336-ccd2-4727-a0d7-ef90fc4c3bb1",
+      "name": "Default Data Loader1"
+    },
+    {
+      "parameters": {
+        "content": "## Inserir dados no RAG",
+        "height": 400,
+        "width": 672
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1008,
+        -64
+      ],
+      "typeVersion": 1,
+      "id": "9ad15594-f4dc-47fb-9c3f-54d70c723f3f",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Apagar dados do RAG",
+        "height": 400,
+        "width": 592,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -256,
+        -64
+      ],
+      "typeVersion": 1,
+      "id": "704f22f9-5a61-4dff-9f47-21affb11d5b0",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -64,
+        208
+      ],
+      "id": "8ef8dd90-0b77-4aee-8815-87bc593fd517",
+      "name": "Embeddings OpenAI1",
+      "credentials": {
+        "openAiApi": {
+          "id": "NX7Zx2vGv04kNGbv",
+          "name": "OpenAI account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Simple Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Simple Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Simple Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Simple Vector Store1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader1": {
+      "ai_document": [
+        [
+          {
+            "node": "Simple Vector Store1",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Simple Vector Store1",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "18e205e2-1d75-48b1-b225-4eef9620955d",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "c462dc2b413d40201bcd3c330f70762ca0964a0e174dd1ea258e2f5a6be87024"
+  },
+  "nodeGroups": [],
+  "id": "ANfKW8fa77GFXQyu",
+  "tags": []
+}
