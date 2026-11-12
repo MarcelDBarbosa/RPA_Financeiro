@@ -4,7 +4,7 @@
 
 Aplicação para automação de envio de email com sugestão de investimento na carteira da instituição conforme perfil do investidor apoiado pela análise de LLM.
 
-Este projeto foi desenvolvido com o N8N tendo como motor do Agente de IA o modelo Lua 6 da OpenAICodex com o modelo. Faz parte do desafio de projeto do Bootcamp Santander/DIO 2026 - Automação com N8N.
+Este projeto foi desenvolvido com o N8N tendo como motor do Agente de IA o modelo Lua 6 da OpenAI usando RAG para incluir informações sobre os investimentos disponíveis. Faz parte do desafio de projeto do Bootcamp Santander/DIO 2026 - Automação com N8N.
 
 ## 🎯 O que o projeto faz
 
